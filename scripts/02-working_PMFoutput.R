@@ -27,8 +27,8 @@ library(tidyverse)
 #############################
 
 
-###########
-## MIC ----
+########### Crossing calculations by site
+## Site: MIC ----
 
 matrizF <- read.csv(
   "./output/PMF/02-factor_profiles_conc_matrizF.csv")  %>%
@@ -50,13 +50,13 @@ for (i in 3:ncol(matrizG)) {
   colnames(result[[i]]) <- row_namesmF
 }
 
-result[[3]]$fator <- "Fator.1"
-result[[4]]$fator <- "Fator.2"
-result[[5]]$fator <- "Fator.3"
-result[[6]]$fator <- "Fator.4"
-result[[7]]$fator <- "Fator.5"
-result[[8]]$fator <- "Fator.6"
-result[[9]]$fator <- "Fator.7"
+result[[3]]$factor <- "Factor.1"
+result[[4]]$factor <- "Factor.2"
+result[[5]]$factor <- "Factor.3"
+result[[6]]$factor <- "Factor.4"
+result[[7]]$factor <- "Factor.5"
+result[[8]]$factor <- "Factor.6"
+result[[9]]$factor <- "Factor.7"
 
 result[[3]]$date <- matrizG$date
 result[[4]]$date <- matrizG$date
@@ -70,19 +70,19 @@ results_factor_site <- dplyr::bind_rows(result)
 results_factor_site$site <- "MIC"
 
 results_factor_site1 <- results_factor_site %>%
-  select(site, date, fator, BC:calcio)
+  select(site, date, factor, BC:calcio)
 
 
 results_factor_site1 <- results_factor_site %>%
   mutate(Br = NA) %>%
   relocate(Br, .before = Zn) %>%
-  select(site, date, fator, BC:calcio)
+  select(site, date, factor, BC:calcio)
 
 
 
 
 ###########
-## NID ----
+## Site: NID ----
 
 matrizF <- read.csv(
   "./output/PMF/02-factor_profiles_conc_matrizF.csv")  %>%
@@ -106,13 +106,13 @@ for (i in 3:ncol(matrizG)) {
 }
 
 
-result[[3]]$fator <- "Fator.1"
-result[[4]]$fator <- "Fator.2"
-result[[5]]$fator <- "Fator.3"
-result[[6]]$fator <- "Fator.4"
-result[[7]]$fator <- "Fator.5"
-result[[8]]$fator <- "Fator.6"
-result[[9]]$fator <- "Fator.7"
+result[[3]]$factor <- "Factor.1"
+result[[4]]$factor <- "Factor.2"
+result[[5]]$factor <- "Factor.3"
+result[[6]]$factor <- "Factor.4"
+result[[7]]$factor <- "Factor.5"
+result[[8]]$factor <- "Factor.6"
+result[[9]]$factor <- "Factor.7"
 
 result[[3]]$date <- matrizG$date
 result[[4]]$date <- matrizG$date
@@ -127,7 +127,7 @@ results_factor_site$site <- "NID"
 
 
 results_factor_site2 <- results_factor_site %>%
-  select(site, date, fator, BC:calcio) 
+  select(site, date, factor, BC:calcio) 
 
 
 
@@ -158,7 +158,7 @@ write_csv(results_factor_sites,
           "./output/02-concentration_species.csv")
 
 
-WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
+
 ###########
 ## Calculating concentration contribution by factor
 df <- results_factor_sites %>%
@@ -166,8 +166,8 @@ df <- results_factor_sites %>%
   rowwise() %>%
   mutate(total = sum(c_across(BC:calcio), na.rm = T)) %>%
   filter(total != 0) %>%
-  select(site, date, fator, total) %>%
-  dcast(site + date ~ fator, value.var = "total")
+  select(site, date, factor, total) %>%
+  dcast(site + date ~ factor, value.var = "total")
 
 
 

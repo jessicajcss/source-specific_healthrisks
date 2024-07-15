@@ -70,11 +70,11 @@ To column descriptions and variable units, see **README_Column_description.txt**
 ## Source apportionment
 
 *Dataset*: 02-factor_profiles_conc_matrizF.csv
-*Dataset*: 02-factor_contribution_matrizG.csv
+*Dataset*: 02-factor_contribution_matrizG.csv 
 
 *Script*: 02-working_PMFoutput.R - calculating each factor sample  concentration.
 
-*Output*: 02-contribution_factor.csv - Matriz G, adjusted to use in the case-crossover analysis.
+*Output*: 02-contribution_factor.csv - Matriz G
 
 
 
@@ -85,7 +85,7 @@ To column descriptions and variable units, see **README_Column_description.txt**
 *Dataset*: 01-health_data.csv - Datasus: hospital admission data
 *Dataset*: 02-contribution_fator.csv - PMF: Matriz G - source contribution
 
-*Script*: 01-preparing_healthrisk_analysis.R - Preparing data to case-crossover analysis
+*Script*: 02-preparing_healthrisk_analysis.R - Preparing data to case-crossover analysis
 *Output*: 03-data_crossanalysis.csv 
 
 *Script*: 03-healthrisk_analysis.R - Health risk analysis - case-crossover design

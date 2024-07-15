@@ -91,6 +91,24 @@ health_data <- datasus.JOI %>%
                       "Feminino" = "Female"))
 
 
+## Holidays (PREFEITURA DE JOINVILLE) ----
+feriados <- read.csv("./draft/00-feriadosjoinville.csv",
+                     na = NA,
+                     sep = ";",
+                     header = TRUE,
+                     check.names = F) %>%
+  select(date) %>%
+  mutate(HOLIDAY = 1, # if holiday, = 1
+         date = dmy(date)) %>%
+  rename("DT_INTER" = "date")
+
+head(feriados)
+
+
+health_data <- left_join(health_data, feriados, by = ("DT_INTER"))
+health_data$HOLIDAY[is.na(health_data$HOLIDAY)] = 0  # if not a holiday, = 0
+
+
 write_csv(health_data, 
           "./output/01-health_data.csv")
 
